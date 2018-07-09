@@ -1,0 +1,6 @@
+*
+!/dist/**/*
+!/src/**/*
+*.md
+!README.md
+

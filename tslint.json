@@ -1,0 +1,53 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "max-line-length": false,
+    "semicolon": [true, "never"],
+    "no-consecutive-blank-lines": false,
+    "quotemark": [true, "double", "avoid-escape"],
+    "interface-name": false,
+    "no-empty-interface": false,
+    "no-namespace": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "arrow-parens": false,
+    "no-string-literal": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "public-static-method",
+          "protected-static-field",
+          "protected-static-method",
+          "private-static-field",
+          "private-static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-inferrable-types": [true, "ignore-params"],
+    "no-switch-case-fall-through": true,
+    "typedef": [true, "call-signature", "parameter"],
+    "trailing-comma": [true, {
+      "multiline": "always",
+      "singleline": "never"
+    }]
+  }
+}

@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git://github.com/corgidisco/inthash.git"
   },
+  "bin": {
+    "inthashgen": "dist/cli.js"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

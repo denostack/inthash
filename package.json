@@ -1,6 +1,6 @@
 {
   "name": "inthash",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Integer Hashing Library based on Knuth's multiplicative hashing method for Javascript(& Typescript).",
   "keywords": [
     "obfuscate",

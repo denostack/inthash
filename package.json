@@ -1,8 +1,14 @@
 {
   "name": "inthash",
   "version": "0.0.1",
-  "description": "Hash Int. support Javascript(& Typescript).",
+  "description": "Integer Hashing Library based on Knuth's multiplicative hashing method for Javascript(& Typescript).",
   "keywords": [
+    "obfuscate",
+    "obfuscation",
+    "knuth",
+    "uuid",
+    "hash",
+    "optimus",
     "typescript"
   ],
   "author": "Cris <corgidisco@gmail.com>",

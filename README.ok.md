@@ -7,7 +7,7 @@
 
 [![NPM](https://nodei.co/npm/inthash.png)](https://www.npmjs.com/package/inthash)
 
-Id obfuscation based on Knuth's multiplicative hashing method for Javascript(& Typescript).
+Integer Hashing Library based on Knuth's multiplicative hashing method for Javascript(& Typescript).
 
 ## Installation
 

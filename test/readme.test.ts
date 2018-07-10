@@ -5,21 +5,24 @@ require("jest") // tslint:disable-line
 
 describe("inthash", () => {
 
-  it("test encode and decode", async () => {
-    const gen = hashid.create(1580030173, 59260789, 1163945558)
+  it("test encode and decode", () => {
+    let countOfRun = 0
 
-    const testcase = []
+    for (let r = 0; r < 100; r++) {
+      const [prime, inverse, xor] = hashid.generate()
+      const gen = hashid.create(prime, inverse, xor)
+      for (let i = 0; i < 2147483647;) {
+        const encoded = gen.encode(i)
 
-    for (let i = 0; i < 2147483647;) {
-      testcase.push(i)
-      const encoded = gen.encode(i)
+        expect(encoded).not.toEqual(i)
+        expect(gen.decode(encoded)).toEqual(i)
 
-      expect(encoded).not.toEqual(i)
-      expect(gen.decode(encoded)).toEqual(i)
-
-      const rand = Math.pow(2, Math.floor(Math.random() * 30))
-      i += Math.floor(Math.random() * rand)
+        const rand = Math.pow(2, Math.floor(Math.random() * 30))
+        i += Math.floor(Math.random() * rand)
+        countOfRun++
+      }
     }
-    console.log("test case is : \n" + testcase.join("\n"))
+
+    expect(countOfRun).toBeGreaterThan(0)
   })
 })

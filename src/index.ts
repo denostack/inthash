@@ -30,6 +30,11 @@ function randomRangePrime(min: number, max: number): number {
   return randomRangePrimePivot(random(min, max), min, max)
 }
 
+export interface Hasher {
+  encode(int: number): number
+  decode(int: number): number
+}
+
 export function generate(): [number, number, number] {
   const prime = randomRangePrime(10000000, MAX_INT32)
   const inverse = big(prime).modInv(2147483648).valueOf()
@@ -40,7 +45,7 @@ export function generate(): [number, number, number] {
   ]
 }
 
-export const create = (prime: number, inverse: number, xor: number) => {
+export const create = (prime: number, inverse: number, xor: number): Hasher => {
   return {
     encode(int: number): number {
       return big(int).multiply(prime).and(MAX_INT32).valueOf() ^ xor

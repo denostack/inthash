@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "adjacent-overload-signatures": false,
     "arrow-parens": false,
     "interface-name": false,
     "max-line-length": false,
@@ -30,7 +31,6 @@
     "no-consecutive-blank-lines": [true, 2],
     "no-inferrable-types": true,
     "no-string-literal": false,
-    "no-unused-variable": [true, {"ignore-pattern": "^_"}],
     "object-literal-sort-keys": false,
     "semicolon": [true, "never"],
     "trailing-comma": [

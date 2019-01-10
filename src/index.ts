@@ -1,5 +1,5 @@
 
-import * as big from "big-integer"
+const big = require("big-integer") // tslint:disable-line
 
 const MAX_INT32 = 2147483647 // Math.pow(2, 31) - 1
 

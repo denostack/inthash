@@ -1,5 +1,5 @@
 
-import * as hashid from "../dist"
+import * as hashid from "../lib"
 
 require("jest") // tslint:disable-line
 

@@ -1,11 +1,14 @@
 # inthash
 
-[![Build](https://travis-ci.org/corgidisco/inthash.svg?branch=master)](https://travis-ci.org/corgidisco/inthash)
-[![Downloads](https://img.shields.io/npm/dt/inthash.svg)](https://npmcharts.com/compare/inthash?minimal=true)
-[![Version](https://img.shields.io/npm/v/inthash.svg)](https://www.npmjs.com/package/inthash)
-[![License](https://img.shields.io/npm/l/inthash.svg)](https://www.npmjs.com/package/inthash)
-
-[![NPM](https://nodei.co/npm/inthash.png)](https://www.npmjs.com/package/inthash)
+<p>
+  <a href="https://travis-ci.org/wan2land/inthash"><img alt="Build" src="https://img.shields.io/travis/wan2land/inthash.svg?style=flat-square" /></a>
+  <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/inthash"><img alt="Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/inthash"><img alt="License" src="https://img.shields.io/npm/l/inthash.svg?style=flat-square" /></a>
+  <br />
+  <a href="https://david-dm.org/wan2land/inthash"><img alt="dependencies Status" src="https://img.shields.io/david/wan2land/inthash.svg?style=flat-square" /></a>
+  <a href="https://david-dm.org/wan2land/inthash?type=dev"><img alt="devDependencies Status" src="https://img.shields.io/david/dev/wan2land/inthash.svg?style=flat-square" /></a>
+</p>
 
 Integer Hashing Library based on Knuth's multiplicative hashing method for Javascript(& Typescript).
 

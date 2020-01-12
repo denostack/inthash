@@ -46,12 +46,12 @@
     "big-integer": "^1.6.38"
   },
   "devDependencies": {
-    "@babel/cli": "7.7.7",
-    "@babel/core": "7.7.7",
-    "@babel/plugin-proposal-class-properties": "7.7.4",
-    "@babel/plugin-proposal-object-rest-spread": "7.7.7",
-    "@babel/preset-env": "7.7.7",
-    "@babel/preset-typescript": "7.7.7",
+    "@babel/cli": "7.8.0",
+    "@babel/core": "7.8.0",
+    "@babel/plugin-proposal-class-properties": "7.8.0",
+    "@babel/plugin-proposal-object-rest-spread": "7.8.0",
+    "@babel/preset-env": "7.8.0",
+    "@babel/preset-typescript": "7.8.0",
     "@types/jest": "24.0.25",
     "@types/node": "10.17.13",
     "jest": "24.9.0",

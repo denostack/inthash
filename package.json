@@ -55,7 +55,7 @@
     "@types/jest": "24.9.1",
     "@types/node": "10.17.14",
     "jest": "24.9.0",
-    "rimraf": "3.0.1",
+    "rimraf": "3.0.2",
     "ts-jest": "24.3.0",
     "tslint": "5.20.1",
     "tslint-language-service": "0.9.9",

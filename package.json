@@ -57,7 +57,7 @@
     "jest": "25.2.3",
     "rimraf": "3.0.2",
     "ts-jest": "25.2.1",
-    "tslint": "5.20.1",
+    "tslint": "6.1.1",
     "tslint-language-service": "0.9.9",
     "typescript": "3.8.3"
   }

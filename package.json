@@ -23,11 +23,11 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "prepack": "npm run build",
+    "prepack": "npm run test && npm run build",
     "build": "rimraf ./lib && tsc --emitDeclarationOnly && babel src --out-dir lib --extensions \".ts\" --source-maps inline",
-    "lint": "tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
-    "jest": "jest test",
-    "test": "npm run build && npm run lint && npm run jest"
+    "test": "npm run build && npm run test:lint && npm run test:unit",
+    "test:lint": "eslint src/**/**/*.ts",
+    "test:unit": "jest test"
   },
   "jest": {
     "transform": {
@@ -54,11 +54,11 @@
     "@babel/preset-typescript": "7.9.0",
     "@types/jest": "25.1.4",
     "@types/node": "10.17.17",
+    "eslint": "^6.8.0",
+    "eslint-config-graphity": "^0.6.2",
     "jest": "25.2.3",
     "rimraf": "3.0.2",
     "ts-jest": "25.2.1",
-    "tslint": "5.20.1",
-    "tslint-language-service": "0.9.9",
     "typescript": "3.8.3"
   }
 }

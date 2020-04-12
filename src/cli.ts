@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-
-import { generate } from "./index"
+import { generate } from './inthash'
 
 const [prime, inverse, xor] = generate()
 

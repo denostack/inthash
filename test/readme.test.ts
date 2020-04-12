@@ -1,7 +1,4 @@
-
-import * as hashid from "../lib"
-
-require("jest") // tslint:disable-line
+import * as inthash from '../lib'
 
 describe("inthash", () => {
 
@@ -9,8 +6,8 @@ describe("inthash", () => {
     let countOfRun = 0
 
     for (let r = 0; r < 100; r++) {
-      const [prime, inverse, xor] = hashid.generate()
-      const gen = hashid.create(prime, inverse, xor)
+      const [prime, inverse, xor] = inthash.generate()
+      const gen = inthash.create(prime, inverse, xor)
       for (let i = 0; i < 2147483647;) {
         const encoded = gen.encode(i)
 

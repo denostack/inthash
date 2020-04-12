@@ -1,7 +1,7 @@
 # inthash
 
 <p>
-  <a href="https://travis-ci.org/wan2land/inthash"><img alt="Build" src="https://img.shields.io/travis/wan2land/inthash.svg?style=flat-square" /></a>
+  <a href="https://github.com/wan2land/inthash/actions?query=workflow%3A%22Node.js+CI%22"><img alt="Build" src="https://img.shields.io/github/workflow/status/wan2land/inthash/Node.js%20CI?logo=github&style=flat-square" /></a>
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="License" src="https://img.shields.io/npm/l/inthash.svg?style=flat-square" /></a>

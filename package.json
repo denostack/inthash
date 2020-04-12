@@ -26,21 +26,8 @@
     "prepack": "npm run test && npm run build",
     "build": "rimraf ./lib && tsc --emitDeclarationOnly && babel src --out-dir lib --extensions \".ts\" --source-maps inline",
     "test": "npm run build && npm run test:lint && npm run test:unit",
-    "test:lint": "eslint src/**/**/*.ts",
-    "test:unit": "jest test"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "[^/]*\\.(test|spec)\\.(j|t)sx?$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json"
-    ]
+    "test:lint": "eslint src/**/*.ts",
+    "test:unit": "jest"
   },
   "dependencies": {
     "big-integer": "^1.6.38"

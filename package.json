@@ -43,7 +43,7 @@
     "@types/node": "10.17.28",
     "eslint": "7.6.0",
     "eslint-config-stable": "0.8.0",
-    "jest": "26.3.0",
+    "jest": "26.4.0",
     "rimraf": "3.0.2",
     "ts-jest": "26.2.0",
     "typescript": "3.9.7"

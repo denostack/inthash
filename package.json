@@ -40,7 +40,7 @@
     "@babel/preset-env": "7.11.5",
     "@babel/preset-typescript": "7.10.4",
     "@types/jest": "26.0.13",
-    "@types/node": "10.17.28",
+    "@types/node": "10.17.29",
     "eslint": "7.8.1",
     "eslint-config-stable": "0.8.0",
     "jest": "26.4.2",

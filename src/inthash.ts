@@ -1,7 +1,6 @@
 
-const big = require('big-integer') // eslint-disable-line
-
-const MAX_INT32 = 2147483647 // Math.pow(2, 31) - 1
+const MAX_INT = Number.MAX_SAFE_INTEGER
+const MAX_INT_N = BigInt(MAX_INT)
 
 function isPrime(x: number): boolean {
   const max = Math.floor(Math.sqrt(x))
@@ -30,28 +29,45 @@ function randomRangePrime(min: number, max: number): number {
   return randomRangePrimePivot(random(min, max), min, max)
 }
 
+function modInv(a: bigint, b: bigint): bigint {
+  let t = 0n
+  let r = b
+  let nextT = 1n
+  let nextR = a
+  while (nextR > 0) {
+    const q = ~~(r / nextR)
+    const [lastT, lastR] = [t, r]
+    ;[t, r] = [nextT, nextR]
+    ;[nextT, nextR] = [lastT - q * nextT, lastR - q * nextR]
+  }
+  return t < 0 ? t + b : t
+}
+
 export interface Hasher {
   encode(int: number): number
   decode(int: number): number
 }
 
 export function generate(): [number, number, number] {
-  const prime = randomRangePrime(10000000, MAX_INT32)
-  const inverse = big(prime).modInv(2147483648).valueOf()
+  const prime = randomRangePrime(10000000, MAX_INT)
+  const inverse = modInv(BigInt(prime), MAX_INT_N + 1n)
   return [
     prime,
-    inverse,
-    random(10000000, MAX_INT32),
+    Number(inverse),
+    random(10000000, MAX_INT),
   ]
 }
 
 export const create = (prime: number, inverse: number, xor: number): Hasher => {
+  const nPrime = BigInt(prime)
+  const nInverse = BigInt(inverse)
+  const nXor = BigInt(xor)
   return {
     encode(int: number): number {
-      return big(int).multiply(prime).and(MAX_INT32).valueOf() ^ xor
+      return Number(BigInt(int) * nPrime & MAX_INT_N ^ nXor)
     },
     decode(int: number): number {
-      return big(int ^ xor).multiply(inverse).and(MAX_INT32).valueOf()
+      return Number((BigInt(int) ^ nXor) * nInverse & MAX_INT_N)
     },
   }
 }

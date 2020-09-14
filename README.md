@@ -55,6 +55,34 @@ const decoded = hashing.decode(encoded) // 100
 
 Done!
 
+## JS Version Support
+
+Using native `BigInt`.
+
+- Node.js >= v10.8
+- Edge >= 79
+- Firefox >= 68
+- Chrome >= 67
+
+- [Browser bigint support](https://caniuse.com/bigint)
+- [Node.js bitint support](https://node.green/#ES2020-features-BigInt)
+
+If you are using an env that doesn't support `Bigint`, Use inthash `v1.x` or lower.
+
+## Typescript
+
+Need bigint option.
+
+```json
+{
+  "compilerOptions": {
+    "lib": [
+      "esnext.bigint"
+    ]
+  }
+}
+```
+
 ## Refs.
 
 - https://github.com/jenssegers/optimus

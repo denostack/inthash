@@ -29,17 +29,17 @@ npm install inthash
 Fortunately, we provide the CLI tool also.
 
 ```
-$ node_modules/.bin/inthashgen
+$ npx inthash
 
 Prime   : 1288792847
 Inverse : 327558127
 Xor     : 74691595
 
-$ inthashgen | pbcopy
+$ npx inthash | pbcopy
 
 then paste to your code! :-) good luck.
 
-require("inthash").create(1288792847, 327558127, 74691595)
+require('inthash').create(1288792847, 327558127, 74691595)
 ```
 
 Copy the output code and paste it into your project.

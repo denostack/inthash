@@ -8,9 +8,9 @@ Prime   : ${prime}
 Inverse : ${inverse}
 Xor     : ${xor}
 
-$ inthashgen | pbcopy
+$ npx inthash | pbcopy
 
 then paste to your code! :-) good luck.
 
 `)
-process.stdout.write(`require("inthash").create(${prime}, ${inverse}, ${xor})\n`)
+process.stdout.write(`require('inthash').create(${prime}, ${inverse}, ${xor})\n`)

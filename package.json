@@ -11,14 +11,14 @@
     "optimus",
     "typescript"
   ],
-  "author": "Cris <corgidisco@gmail.com>",
+  "author": "Changwan Jun <wan2land@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/corgidisco/inthash.git"
+    "url": "git://github.com/wan2land/inthash.git"
   },
   "bin": {
-    "inthashgen": "lib/cli.js"
+    "inthash": "lib/cli.js"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

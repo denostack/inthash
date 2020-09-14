@@ -1,6 +1,6 @@
 {
   "name": "inthash",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Integer Hashing Library based on Knuth's multiplicative hashing method for Javascript(& Typescript).",
   "keywords": [
     "obfuscate",
@@ -9,6 +9,7 @@
     "uuid",
     "hash",
     "optimus",
+    "bigint",
     "typescript"
   ],
   "author": "Changwan Jun <wan2land@gmail.com>",

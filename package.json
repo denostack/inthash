@@ -38,7 +38,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.12.1",
     "@babel/preset-env": "7.12.7",
     "@babel/preset-typescript": "7.12.7",
-    "@types/jest": "26.0.15",
+    "@types/jest": "26.0.16",
     "@types/node": "10.17.48",
     "eslint": "7.14.0",
     "eslint-config-stable": "0.8.0",

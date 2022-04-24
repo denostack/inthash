@@ -10,12 +10,29 @@
   <a href="https://david-dm.org/wan2land/inthash?type=dev"><img alt="devDependencies Status" src="https://img.shields.io/david/dev/wan2land/inthash.svg?style=flat-square" /></a>
 </p>
 
-Integer Hashing Library based on Knuth's multiplicative hashing method for Javascript(& Typescript).
+Integer Hashing Library based on Knuth's multiplicative hashing method for
+Javascript(& Typescript).
 
 ## Installation
 
+### Node.js
+
 ```bash
 npm install inthash
+```
+
+```ts
+import { Hasher } from "inthash";
+
+//
+```
+
+### Deno
+
+```ts
+import { Hasher } from "https://deno.land/x/inthash/mod.ts";
+
+//
 ```
 
 ## Usage
@@ -46,42 +63,23 @@ Copy the output code and paste it into your project.
 
 There are only two methods. `encode` and `decode`.
 
-```javascript
-const hashing = require("inthash").create(1288792847, 327558127, 74691595)
+```ts
+const hasher = new Hasher({
+  bits: 53, // Javascript, Number.MAX_SAFE_INTEGER
+  prime: "6456111708547433",
+  inverse: "3688000043513561",
+  xor: "969402349590075",
+});
 
-const encoded = hashing.encode(100) // 96363991
-const decoded = hashing.decode(encoded) // 100
+const encoded = hasher.encode(100); // 6432533451586367
+const decoded = hasher.decode(encoded); // 100
 ```
 
 Done!
 
-## JS Version Support
+### MySQL `bigint(20)`
 
-Using native `BigInt`.
-
-- Node.js >= v10.8
-- Edge >= 79
-- Firefox >= 68
-- Chrome >= 67
-
-- [Browser bigint support](https://caniuse.com/bigint)
-- [Node.js bitint support](https://node.green/#ES2020-features-BigInt)
-
-If you are using an env that doesn't support `Bigint`, Use inthash `v1.x` or lower.
-
-## Typescript
-
-Need bigint option.
-
-```json
-{
-  "compilerOptions": {
-    "lib": [
-      "esnext.bigint"
-    ]
-  }
-}
-```
+:-)
 
 ## Refs.
 

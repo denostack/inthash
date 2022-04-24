@@ -2,7 +2,7 @@ import { Hasher } from "./hasher.ts";
 
 const options = Hasher.generate();
 
-const isDeno = typeof Deno !== "undefined";
+const isDeno = typeof (globalThis as any).Deno !== "undefined";
 const cmd = isDeno
   ? "deno run https://deno.land/x/inthash/cli.ts"
   : "npx inthash";

@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "publish": "deno run --allow-env --allow-read --allow-write --allow-run scripts/build_npm.ts"
+  },
+  "lint": {
+    "files": {
+      "exclude": [".npm"]
+    }
+  }
+}

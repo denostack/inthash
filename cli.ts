@@ -1,3 +1,5 @@
+// deno-lint-ignore-file no-explicit-any
+
 import { parse } from "https://deno.land/std@0.136.0/flags/mod.ts";
 import { Hasher } from "./hasher.ts";
 

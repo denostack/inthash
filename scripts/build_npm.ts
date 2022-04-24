@@ -1,8 +1,14 @@
 import { build, emptyDir } from "https://deno.land/x/dnt@0.22.0/mod.ts";
+import { bgGreen } from "https://deno.land/std@0.136.0/fmt/colors.ts";
 
-const cmd = Deno.run({ cmd: ["git", "describe", "--tags"], stdout: "piped" });
+const cmd = Deno.run({
+  cmd: ["git", "describe", "--tags", "--abbrev=0"],
+  stdout: "piped",
+});
 const version = new TextDecoder().decode(await cmd.output()).trim();
 cmd.close();
+
+console.log(bgGreen(`version: ${version}`));
 
 await emptyDir("./.npm");
 

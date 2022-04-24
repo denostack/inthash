@@ -27,7 +27,6 @@ function randomBigInt(range: bigint): bigint {
 
 // https://github.com/openssl/openssl/blob/4cedf30e995f9789cf6bb103e248d33285a84067/crypto/bn/bn_prime.c#L337
 export function isPrimeMillerRabin(w: bigint, iterations?: number): boolean {
-  // console.log("isprime", w);
   if (w === 2n) {
     return true;
   }
@@ -53,21 +52,17 @@ export function isPrimeMillerRabin(w: bigint, iterations?: number): boolean {
   // (Step 4)
   outer_loop:
   for (let i = 0; i < iterations; i++) {
-    // console.log("iter", i);
     // (Step 4.1) obtain a Random string of bits b where 1 < b < w-1 */
     const b = randomBigInt(w3) + 2n;
-    // console.log("step 4.1");
 
     // (Step 4.5) z = b^m mod w
     // in openssl, Montgomery modular multiplication (TODO)
-    // console.log("step 4.5", b, m, w);
     let z = modPow(b, m, w);
 
     /* (Step 4.6) if (z = 1 or z = w-1) */
     if (z === 1n || z === w1) {
       continue outer_loop;
     }
-    // console.log("step 4.7", a);
     /* (Step 4.7) for j = 1 to a-1 */
     for (let j = 1; j < a; j++) {
       // (Step 4.7.1 - 4.7.2) x = z, z = x^2 mod w
@@ -96,7 +91,6 @@ function randomOdd(bits: number): bigint {
 }
 
 export function randomPrime(bits: number): bigint {
-  // console.log("random", bits);
   if (bits < 2) {
     return 1n;
   }

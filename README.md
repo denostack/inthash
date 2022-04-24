@@ -1,13 +1,11 @@
 # inthash
 
 <p>
-  <a href="https://github.com/wan2land/inthash/actions?query=workflow%3A%22Node.js+CI%22"><img alt="Build" src="https://img.shields.io/github/workflow/status/wan2land/inthash/Node.js%20CI?logo=github&style=flat-square" /></a>
+  <a href="https://github.com/wan2land/inthash/actions?query=workflow%3A%22Deno%20Test%22"><img alt="Build" src="https://img.shields.io/github/workflow/status/wan2land/inthash/Deno%20Test?logo=github&style=flat-square" /></a>
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="License" src="https://img.shields.io/npm/l/inthash.svg?style=flat-square" /></a>
-  <br />
-  <a href="https://david-dm.org/wan2land/inthash"><img alt="dependencies Status" src="https://img.shields.io/david/wan2land/inthash.svg?style=flat-square" /></a>
-  <a href="https://david-dm.org/wan2land/inthash?type=dev"><img alt="devDependencies Status" src="https://img.shields.io/david/dev/wan2land/inthash.svg?style=flat-square" /></a>
+  <img alt="Language Typescript" src="https://img.shields.io/badge/language-Typescript-007acc.svg?style=flat-square" />
 </p>
 
 Integer Hashing Library based on Knuth's multiplicative hashing method for

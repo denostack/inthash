@@ -43,18 +43,18 @@ import { Hasher } from "https://deno.land/x/inthash/mod.ts";
 
 Fortunately, we provide the CLI tool also.
 
+```bash
+npx inthash
+# deno run https://deno.land/x/inthash/cli.ts
 ```
-$ npx inthash
 
-Prime   : 1288792847
-Inverse : 327558127
-Xor     : 74691595
-
-$ npx inthash | pbcopy
-
-then paste to your code! :-) good luck.
-
-require('inthash').create(1288792847, 327558127, 74691595)
+```
+{
+  "bits": 53,
+  "prime": "6456111708547433",
+  "inverse": "3688000043513561",
+  "xor": "969402349590075"
+}
 ```
 
 Copy the output code and paste it into your project.
@@ -75,9 +75,40 @@ const decoded = hasher.decode(encoded); // 100
 
 Done!
 
-### MySQL `bigint(20)`
+Of course, you can use other types of values as well.
 
-:-)
+```ts
+// string
+const encoded = hasher.encode("100"); // "6432533451586367"
+const decoded = hasher.decode(encoded); // "100"
+```
+
+```ts
+// bigint
+const encoded = hasher.encode(100n); // 6432533451586367n
+const decoded = hasher.decode(encoded); // 100n
+```
+
+### with MySQL `bigint(20)`
+
+To handle `bigint(20)` in mysql, you have to deal with 64bit. In the past
+`inthash` library only supported up to 53bit(`Number.MAX_SAFE_INTEGER(2^53-1)`),
+the maximum value of JavaScript integer type. From v3.0.0 onwards, 64-bit is
+also available. :-)
+
+```bash
+npx inthash -b64
+# deno run https://deno.land/x/inthash/cli.ts -b64
+```
+
+```
+{
+  "bits": 64,
+  "prime": "16131139598801670337",
+  "inverse": "14287487925114175297",
+  "xor": "8502035541264656686"
+}
+```
 
 ## Refs.
 

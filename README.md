@@ -37,16 +37,21 @@ import { Hasher } from "https://deno.land/x/inthash/mod.ts";
 
 3 values are required before using inthash.
 
-1. Prime
-2. Inverse
-3. Xor (Random Number)
+1. `prime` - Prime number
+2. `inverse` - Modular inverse
+3. `xor` - Random n-bit int
 
-Fortunately, we provide the CLI tool also.
+Generate the above 3 values with the following command:
 
 ```bash
+# Using node:
 npx inthash
-# deno run https://deno.land/x/inthash/cli.ts
+
+# Using deno:
+deno run https://deno.land/x/inthash/cli.ts
 ```
+
+**output:**
 
 ```
 {
@@ -59,8 +64,6 @@ npx inthash
 
 Copy the output code and paste it into your project.
 
-There are only two methods. `encode` and `decode`.
-
 ```ts
 const hasher = new Hasher({
   bits: 53, // Javascript, Number.MAX_SAFE_INTEGER
@@ -68,38 +71,44 @@ const hasher = new Hasher({
   inverse: "3688000043513561",
   xor: "969402349590075",
 });
+```
 
+There are only two methods. `encode` and `decode`.
+
+```ts
 const encoded = hasher.encode(100); // 6432533451586367
 const decoded = hasher.decode(encoded); // 100
 ```
 
-Done!
-
-Of course, you can use other types of values as well.
+`string` and `bigint` values are also available.
 
 ```ts
-// string
+// string in-out
 const encoded = hasher.encode("100"); // "6432533451586367"
 const decoded = hasher.decode(encoded); // "100"
 ```
 
 ```ts
-// bigint
+// bigint in-out
 const encoded = hasher.encode(100n); // 6432533451586367n
 const decoded = hasher.decode(encoded); // 100n
 ```
 
-### with MySQL `bigint(20)`
+### How can I use MySQL `bigint(20)`?
 
-To handle `bigint(20)` in mysql, you have to deal with 64bit. In the past
-`inthash` library only supported up to 53bit(`Number.MAX_SAFE_INTEGER(2^53-1)`),
-the maximum value of JavaScript integer type. From v3.0.0 onwards, 64-bit is
-also available. :-)
+To handle `bigint(20)` in mysql, you have to deal with 64bit. Old version
+`inthash` library only supported up to 53bit(`Number.MAX_SAFE_INTEGER === 2**53 - 1`)
+From v3 or later, n-bit is supported. :-)
 
 ```bash
+# Using node:
 npx inthash -b64
-# deno run https://deno.land/x/inthash/cli.ts -b64
+
+# Using deno:
+deno run https://deno.land/x/inthash/cli.ts -b64
 ```
+
+**output:**
 
 ```
 {

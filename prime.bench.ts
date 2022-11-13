@@ -17,14 +17,17 @@ const primes = [
   6067841561n,
 ];
 
-Deno.bench("isPrime", { n: 10 }, () => {
+Deno.bench({ name: "isPrime", group: "prime" }, () => {
   for (const p of primes) {
     isPrime(p);
   }
 });
 
-Deno.bench("isPrimeMillerRabin", { n: 10 }, () => {
-  for (const p of primes) {
-    isPrimeMillerRabin(p);
-  }
-});
+Deno.bench(
+  { name: "isPrimeMillerRabin", group: "prime", baseline: true },
+  () => {
+    for (const p of primes) {
+      isPrimeMillerRabin(p);
+    }
+  },
+);

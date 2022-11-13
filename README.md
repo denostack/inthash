@@ -97,8 +97,9 @@ const decoded = hasher.decode(encoded); // 100n
 ### How can I use MySQL `bigint(20)`?
 
 To handle `bigint(20)` in mysql, you have to deal with 64bit. Old version
-`inthash` library only supported up to 53bit(`Number.MAX_SAFE_INTEGER === 2**53 - 1`)
-From v3 or later, n-bit is supported. :-)
+`inthash` library only supported up to
+53bit(`Number.MAX_SAFE_INTEGER === 2**53 - 1`) From v3 or later, n-bit is
+supported. :-)
 
 ```bash
 # Using node:

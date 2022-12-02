@@ -1,5 +1,5 @@
-import { build, emptyDir } from "https://deno.land/x/dnt@0.22.0/mod.ts";
-import { bgGreen } from "https://deno.land/std@0.136.0/fmt/colors.ts";
+import { build, emptyDir } from "dnt/mod.ts";
+import { bgGreen } from "fmt/colors.ts";
 
 const cmd = Deno.run({
   cmd: ["git", "describe", "--tags", "--abbrev=0"],

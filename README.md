@@ -1,5 +1,7 @@
 # inthash
 
+<img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="240" />
+
 <p>
   <a href="https://github.com/wan2land/inthash/actions?query=workflow%3A%22Deno%20Test%22"><img alt="Build" src="https://img.shields.io/github/workflow/status/wan2land/inthash/Deno%20Test?logo=github&style=flat-square" /></a>
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>

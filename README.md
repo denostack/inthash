@@ -4,8 +4,10 @@
 
 <p>
   <a href="https://github.com/wan2land/inthash/actions?query=workflow%3A%22Deno%20Test%22"><img alt="Build" src="https://img.shields.io/github/workflow/status/wan2land/inthash/Deno%20Test?logo=github&style=flat-square" /></a>
+  <a href="https://codecov.io/gh/denostack/inthash"><img alt="Coverage" src="https://img.shields.io/codecov/c/gh/denostack/inthash?style=flat-square" /></a>
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square" /></a>
+  <a href="https://deno.land/x/inthash"><img alt="deno.land/x/inthash" src="https://img.shields.io/github/v/release/denostack/inthash?display_name=tag&label=deno.land/x/inthash@&style=flat-square&logo=deno&labelColor=000&color=777" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="License" src="https://img.shields.io/npm/l/inthash.svg?style=flat-square" /></a>
   <img alt="Language Typescript" src="https://img.shields.io/badge/language-Typescript-007acc.svg?style=flat-square" />
 </p>
@@ -15,71 +17,59 @@ Javascript(& Typescript).
 
 ## Installation
 
-### Node.js
+**Node.js**
 
 ```bash
 npm install inthash
 ```
 
-```ts
-import { Hasher } from "inthash";
-
-//
-```
-
-### Deno
+**Deno**
 
 ```ts
 import { Hasher } from "https://deno.land/x/inthash/mod.ts";
-
-//
 ```
 
 ## Usage
 
-3 values are required before using inthash.
-
-1. `prime` - Prime number
-2. `inverse` - Modular inverse
-3. `xor` - Random n-bit int
-
-Generate the above 3 values with the following command:
+Generate random settings with the following command:
 
 ```bash
-# Using node:
+# Node.js:
 npx inthash
 
-# Using deno:
+# Deno:
 deno run https://deno.land/x/inthash/cli.ts
+
+# Output:
+# {
+#   "bits": 53,
+#   "prime": "6456111708547433",
+#   "inverse": "3688000043513561",
+#   "xor": "969402349590075"
+# }
 ```
 
-**output:**
-
-```
-{
-  "bits": 53,
-  "prime": "6456111708547433",
-  "inverse": "3688000043513561",
-  "xor": "969402349590075"
-}
-```
-
-Copy the output code and paste it into your project.
+And create hasher like this:
 
 ```ts
 const hasher = new Hasher({
   bits: 53, // Javascript, Number.MAX_SAFE_INTEGER
-  prime: "6456111708547433",
-  inverse: "3688000043513561",
-  xor: "969402349590075",
+  prime: "6456111708547433", // Random Prime
+  inverse: "3688000043513561", // Modular Inverse
+  xor: "969402349590075", // Random n-bit xor mask
 });
-```
 
-There are only two methods. `encode` and `decode`.
+const encoded = hasher.encode(100); // result: 6432533451586367
+const decoded = hasher.decode(encoded); // result: 100
 
-```ts
-const encoded = hasher.encode(100); // 6432533451586367
-const decoded = hasher.decode(encoded); // 100
+// You can obfuscate predictable numbers like 'Auto Increment'!
+hasher.encode(1); // 6085136369434450
+hasher.encode(2); // 4132187376469225
+hasher.encode(3); // 2180123214014976
+hasher.encode(4); // 6982551782798239
+hasher.encode(5); // 5030633649101110
+hasher.encode(6); // 3077950944243277
+hasher.encode(7); // 1125015438342116
 ```
 
 `string` and `bigint` values are also available.
@@ -104,22 +94,19 @@ To handle `bigint(20)` in mysql, you have to deal with 64bit. Old version
 supported. :-)
 
 ```bash
-# Using node:
+# Node.js:
 npx inthash -b64
 
-# Using deno:
+# Deno:
 deno run https://deno.land/x/inthash/cli.ts -b64
-```
 
-**output:**
-
-```
-{
-  "bits": 64,
-  "prime": "16131139598801670337",
-  "inverse": "14287487925114175297",
-  "xor": "8502035541264656686"
-}
+# Output:
+# {
+#   "bits": 64,
+#   "prime": "16131139598801670337",
+#   "inverse": "14287487925114175297",
+#   "xor": "8502035541264656686"
+# }
 ```
 
 ## Refs.

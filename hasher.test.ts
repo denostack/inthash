@@ -63,6 +63,7 @@ Deno.test("README.md sample", () => {
   const encoded = hasher.encode("100");
   const decoded = hasher.decode(encoded);
 
+  assertEquals(encoded, "6432533451586367");
   assertEquals(decoded, "100");
 
   assertEquals(hasher.encode(1), 6085136369434450);

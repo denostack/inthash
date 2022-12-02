@@ -16,6 +16,6 @@
     "test:lint": "deno lint",
     "test:unit": "deno test -A",
     "test:types": "deno check mod.ts",
-    "build:npm": "deno run --allow-env --allow-read --allow-write --allow-run scripts/build_npm.ts"
+    "build:npm": "deno run --allow-env --allow-read --allow-write --allow-net --allow-run scripts/build_npm.ts"
   }
 }

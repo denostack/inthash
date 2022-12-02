@@ -1,6 +1,6 @@
 # inthash
 
-<img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="240" />
+<a href="https://github.com/denostack"><img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="240" /></a>
 
 <p>
   <a href="https://github.com/wan2land/inthash/actions"><img alt="Build" src="https://img.shields.io/github/workflow/status/wan2land/inthash/CI?logo=github&style=flat-square" /></a>

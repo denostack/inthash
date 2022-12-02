@@ -3,7 +3,7 @@
 <a href="https://github.com/denostack"><img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="240" /></a>
 
 <p>
-  <a href="https://github.com/wan2land/inthash/actions"><img alt="Build" src="https://img.shields.io/github/workflow/status/wan2land/inthash/CI?logo=github&style=flat-square" /></a>
+  <a href="https://github.com/denostack/inthash/actions"><img alt="Build" src="https://img.shields.io/github/workflow/status/denostack/inthash/CI?logo=github&style=flat-square" /></a>
   <a href="https://codecov.io/gh/denostack/inthash"><img alt="Coverage" src="https://img.shields.io/codecov/c/gh/denostack/inthash?style=flat-square" /></a>
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square" /></a>

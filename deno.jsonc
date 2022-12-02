@@ -1,10 +1,21 @@
 {
-  "tasks": {
-    "publish": "deno run --allow-env --allow-read --allow-write --allow-run scripts/build_npm.ts"
-  },
+  "importMap": "import_map.json",
   "lint": {
     "files": {
       "exclude": [".npm"]
     }
+  },
+  "fmt": {
+    "files": {
+      "exclude": [".npm"]
+    }
+  },
+  "tasks": {
+    "test": "deno task test:unit && deno task test:lint && deno task test:format && deno task test:types",
+    "test:format": "deno fmt --check",
+    "test:lint": "deno lint",
+    "test:unit": "deno test -A",
+    "test:types": "deno check mod.ts",
+    "build:npm": "deno run --allow-env --allow-read --allow-write --allow-run scripts/build_npm.ts"
   }
 }

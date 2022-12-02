@@ -1,7 +1,9 @@
 {
   "deno.enable": true,
   "deno.lint": true,
-  "deno.unstable": true,
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "denoland.vscode-deno"
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "cSpell.words": [
+    "inthash"
+  ]
 }

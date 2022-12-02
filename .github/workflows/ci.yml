@@ -1,4 +1,4 @@
-name: Deno Test
+name: CI
 
 on:
   push:
@@ -19,11 +19,17 @@ jobs:
         uses: denoland/setup-deno@v1
         with:
           deno-version: ${{ matrix.deno-version }}
-      - name: Format Deno Module
+      - name: Format
         run: deno fmt --check
-      - name: Lint Deno Module
+      - name: Lint
         run: deno lint
-      - name: Build Deno Module
-        run: deno run --reload mod.ts
-      - name: Test Deno Module
-        run: deno test --allow-none
+      - name: Unit
+        run: deno test --coverage=coverage
+      - name: Create coverage report
+        run:  deno coverage ./coverage --lcov > coverage.lcov
+      - name: Collect coverage
+        uses: codecov/codecov-action@v1.0.10
+        with:
+          file: ./coverage.lcov
+      - name: Build Module
+        run: deno task build:npm

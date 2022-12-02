@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertNotEquals,
-} from "https://deno.land/std@0.131.0/testing/asserts.ts";
+import { assertEquals, assertNotEquals } from "testing/asserts.ts";
 import { Hasher } from "./hasher.ts";
 
 Deno.test("hasher, encode and decode", () => {
@@ -53,4 +50,26 @@ Deno.test("hasher, encode and decode", () => {
 
     assertEquals(runs > 0, true);
   }
+});
+
+Deno.test("README.md sample", () => {
+  const hasher = new Hasher({
+    bits: 53, // Javascript, Number.MAX_SAFE_INTEGER
+    prime: "6456111708547433",
+    inverse: "3688000043513561",
+    xor: "969402349590075",
+  });
+
+  const encoded = hasher.encode("100");
+  const decoded = hasher.decode(encoded);
+
+  assertEquals(decoded, "100");
+
+  assertEquals(hasher.encode(1), 6085136369434450);
+  assertEquals(hasher.encode(2), 4132187376469225);
+  assertEquals(hasher.encode(3), 2180123214014976);
+  assertEquals(hasher.encode(4), 6982551782798239);
+  assertEquals(hasher.encode(5), 5030633649101110);
+  assertEquals(hasher.encode(6), 3077950944243277);
+  assertEquals(hasher.encode(7), 1125015438342116);
 });

@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 
-import { parse } from "https://deno.land/std@0.136.0/flags/mod.ts";
+import { parse } from "./deps.ts";
 import { Hasher } from "./hasher.ts";
 
 const isDeno = typeof (globalThis as any).Deno !== "undefined";

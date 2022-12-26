@@ -26,6 +26,9 @@ await build({
     deno: false,
   },
   test: false,
+  compilerOptions: {
+    lib: ["es2020", "dom"],
+  },
   package: {
     name: "inthash",
     version,

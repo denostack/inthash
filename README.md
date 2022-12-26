@@ -12,8 +12,8 @@
   <img alt="Language Typescript" src="https://img.shields.io/badge/language-Typescript-007acc.svg?style=flat-square" />
 </p>
 
-Integer Hashing Library based on Knuth's multiplicative hashing method for
-Javascript(& Typescript).
+A library for generating integer hash values using Knuth's multiplicative method
+in Javascript and Typescript.
 
 ## Installation
 

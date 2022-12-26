@@ -33,7 +33,7 @@ await build({
     name: "inthash",
     version,
     description:
-      "Integer Hashing Library based on Knuth's multiplicative hashing method for Javascript(& Typescript).",
+      "A library for generating integer hash values using Knuth's multiplicative method in Javascript and Typescript.",
     keywords: [
       "obfuscate",
       "obfuscation",

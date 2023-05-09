@@ -1,7 +1,0 @@
-{
-  "imports": {
-    "dnt/": "https://deno.land/x/dnt@0.32.1/",
-    "fmt/": "https://deno.land/std@0.167.0/fmt/",
-    "testing/": "https://deno.land/std@0.167.0/testing/"
-  }
-}

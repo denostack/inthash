@@ -1,14 +1,15 @@
 {
-  "importMap": "import_map.json",
+  "version": "3.0.2",
+  "imports": {
+    "dnt/": "https://deno.land/x/dnt@0.34.0/",
+    "fmt/": "https://deno.land/std@0.186.0/fmt/",
+    "testing/": "https://deno.land/std@0.186.0/testing/"
+  },
   "lint": {
-    "files": {
-      "exclude": [".npm"]
-    }
+    "exclude": [".npm"]
   },
   "fmt": {
-    "files": {
-      "exclude": [".npm"]
-    }
+    "exclude": [".npm"]
   },
   "tasks": {
     "test": "deno task test:unit && deno task test:lint && deno task test:format && deno task test:types",

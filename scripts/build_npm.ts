@@ -1,12 +1,10 @@
 import { build, emptyDir } from "dnt/mod.ts";
 import { bgGreen } from "fmt/colors.ts";
 
-const cmd = Deno.run({
-  cmd: ["git", "describe", "--tags", "--abbrev=0"],
-  stdout: "piped",
-});
-const version = new TextDecoder().decode(await cmd.output()).trim();
-cmd.close();
+const denoInfo = JSON.parse(
+  Deno.readTextFileSync(new URL("../deno.json", import.meta.url)),
+);
+const version = denoInfo.version;
 
 console.log(bgGreen(`version: ${version}`));
 

@@ -13,8 +13,11 @@
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
 </p>
 
-A library for generating integer hash values using Knuth's multiplicative method
-in Javascript and Typescript.
+inthash is a versatile library for generating integer hash values in Javascript
+and Typescript using Knuth's multiplicative method. With a user-friendly
+interface, this library allows you to obfuscate predictable numbers, making it
+ideal for scenarios like 'Auto Increment' values in databases. inthash supports
+`number`, `string`, `bigint`.
 
 ## Installation
 
@@ -32,7 +35,9 @@ import { Hasher } from "https://deno.land/x/inthash/mod.ts";
 
 ## Usage
 
-Generate random settings with the following command:
+### Generating Random Settings
+
+Run the following command to generate random settings for your hasher:
 
 ```bash
 # Node.js:
@@ -50,7 +55,9 @@ deno run https://deno.land/x/inthash/cli.ts
 # }
 ```
 
-And create hasher like this:
+### Creating and Using a Hasher
+
+Create a hasher with the generated settings:
 
 ```ts
 const hasher = new Hasher({
@@ -73,26 +80,26 @@ hasher.encode(6); // 3077950944243277
 hasher.encode(7); // 1125015438342116
 ```
 
-`string` and `bigint` values are also available.
+inthash also supports `string` and `bigint` values:
 
 ```ts
-// string in-out
+// String input and output
 const encoded = hasher.encode("100"); // "6432533451586367"
 const decoded = hasher.decode(encoded); // "100"
 ```
 
 ```ts
-// bigint in-out
+// BigInt input and output
 const encoded = hasher.encode(100n); // 6432533451586367n
 const decoded = hasher.decode(encoded); // 100n
 ```
 
-### How can I use MySQL `bigint(20)`?
+### Handling MySQL `bigint(20)`
 
-To handle `bigint(20)` in mysql, you have to deal with 64bit. Old version
-`inthash` library only supported up to
-53bit(`Number.MAX_SAFE_INTEGER === 2**53 - 1`) From v3 or later, n-bit is
-supported. :-)
+To work with `bigint(20)` in MySQL, you need to handle 64-bit values. The old
+version of IntHash supported up to 53-bit values
+(`Number.MAX_SAFE_INTEGER === 2**53 - 1`). From v3 onwards, n-bit values are
+supported:
 
 ```bash
 # Node.js:

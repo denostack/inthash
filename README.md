@@ -117,6 +117,8 @@ deno run https://deno.land/x/inthash/cli.ts -b64
 # }
 ```
 
-## Refs.
+## See also
 
-- https://github.com/jenssegers/optimus
+- [optimus](https://github.com/jenssegers/optimus) A PHP implementation of
+  Knuth's multiplicative hashing method. inthash is inspired by and ported from
+  this library.

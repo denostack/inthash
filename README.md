@@ -1,6 +1,4 @@
-# inthash
-
-<a href="https://github.com/denostack"><img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="240" /></a>
+# inthash <a href="https://github.com/denostack"><img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="160" align="right" /></a>
 
 <p>
   <a href="https://github.com/denostack/inthash/actions"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/denostack/inthash/ci.yml?branch=main&logo=github&style=flat-square" /></a>

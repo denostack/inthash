@@ -74,3 +74,14 @@ Deno.test("README.md sample", () => {
   assertEquals(hasher.encode(6), 3077950944243277);
   assertEquals(hasher.encode(7), 1125015438342116);
 });
+
+Deno.test("full coverage of 8bit", () => {
+  for (let run = 0; run < 100; run++) {
+    const hasher = new Hasher(Hasher.generate(8));
+
+    for (let i = 0; i < 256; i++) {
+      assertEquals(hasher.decode(hasher.encode(i)), i);
+    }
+    assertEquals(hasher.decode(hasher.encode(256)), 0); // overflow
+  }
+});

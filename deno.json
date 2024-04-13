@@ -1,6 +1,6 @@
 {
   "name": "@denostack/inthash",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "tasks": {
     "test": "deno task test:unit && deno task test:lint && deno task test:format && deno task test:types",
     "test:format": "deno fmt --check",

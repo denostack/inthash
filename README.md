@@ -67,15 +67,21 @@ const hasher = new Hasher({
 
 const encoded = hasher.encode(100); // result: 6432533451586367
 const decoded = hasher.decode(encoded); // result: 100
+```
 
+![diagram](./diagram.png)
+
+```ts
 // You can obfuscate predictable numbers like 'Auto Increment'!
+hasher.encode(0); // 969402349590075
 hasher.encode(1); // 6085136369434450
 hasher.encode(2); // 4132187376469225
 hasher.encode(3); // 2180123214014976
-hasher.encode(4); // 6982551782798239
-hasher.encode(5); // 5030633649101110
-hasher.encode(6); // 3077950944243277
-hasher.encode(7); // 1125015438342116
+
+hasher.encode(Number.MAX_SAFE_INTEGER - 3); // 2024647471942759
+hasher.encode(Number.MAX_SAFE_INTEGER - 2); // 6827076040726014
+hasher.encode(Number.MAX_SAFE_INTEGER - 1); // 4875011878271765
+hasher.encode(Number.MAX_SAFE_INTEGER); // 2922062885306540
 ```
 
 inthash also supports `string` and `bigint` values:

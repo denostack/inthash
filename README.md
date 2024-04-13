@@ -6,8 +6,9 @@
   <img alt="License" src="https://img.shields.io/npm/l/inthash.svg?style=flat-square" />
   <img alt="Language Typescript" src="https://img.shields.io/badge/language-Typescript-007acc.svg?style=flat-square" />
   <br />
-  <a href="https://deno.land/x/inthash"><img alt="deno.land/x/inthash" src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/repos/denostack/inthash/tags&query=$[0].name&display_name=tag&label=deno.land/x/inthash@&style=flat-square&logo=deno&labelColor=000&color=777" /></a>
-  <a href="https://www.npmjs.com/package/inthash"><img alt="Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square&logo=npm" /></a>
+  <a href="https://jsr.io/@denostack/inthash"><img alt="JSR version" src="https://jsr.io/badges/@denostack/inthash?style=flat-square" /></a>
+  <a href="https://deno.land/x/inthash"><img alt="Deno version" src="https://deno.land/badge/inthash/version?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/inthash"><img alt="NPM Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square&logo=npm" /></a>
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
 </p>
 
@@ -42,7 +43,10 @@ Run the following command to generate random settings for your hasher:
 npx inthash
 
 # Deno:
-deno run https://deno.land/x/inthash/cli.ts
+deno run jsr:@denostack/inthash/cli
+
+# Bun
+bunx inthash
 
 # Output:
 # {

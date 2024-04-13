@@ -4,6 +4,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "cSpell.words": [
+    "bunx",
     "deno",
     "denostack",
     "hasher",

@@ -1,4 +1,4 @@
-import { assertEquals, assertNotEquals } from "testing/asserts.ts";
+import { assertEquals, assertNotEquals } from "@std/assert";
 import { Hasher } from "./hasher.ts";
 
 Deno.test("hasher, encode and decode", () => {

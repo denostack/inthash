@@ -1,4 +1,5 @@
 import { assertEquals, assertNotEquals } from "@std/assert";
+import { assertSpyCall, assertSpyCalls, spy } from "@std/testing/mock";
 import { Hasher } from "./hasher.ts";
 
 Deno.test("hasher, encode and decode", () => {
@@ -82,6 +83,18 @@ Deno.test("full coverage of 8bit", () => {
     for (let i = 0; i < 256; i++) {
       assertEquals(hasher.decode(hasher.encode(i)), i);
     }
-    assertEquals(hasher.decode(hasher.encode(256)), 0); // overflow
   }
+});
+
+Deno.test("overflow", () => {
+  const hasher = new Hasher(Hasher.generate(8));
+
+  const logSpy = spy(console, "warn");
+
+  hasher.encode(256);
+
+  assertSpyCall(logSpy, 0, {
+    args: ["input 256 is greater than max 255"],
+  });
+  assertSpyCalls(logSpy, 1);
 });

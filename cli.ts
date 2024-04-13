@@ -14,6 +14,7 @@ const args = parse(rawArgs);
 
 const bit = args.b ?? args.bit ?? args.bits ?? 53;
 const options = Hasher.generate(bit);
+const hasher = new Hasher(options);
 
 console.log(JSON.stringify(options, null, "  "));
 console.error(`
@@ -21,9 +22,7 @@ $ ${cmd}${cmdSuffix ? " " + cmdSuffix : ""} | pbcopy
 
 Now go ahead and paste it into your code! Good luck. :-)
 
-Note: The supported range of integers is from min: 0 to max: ${
-  (1n << BigInt(bit)) - 1n
-}.
+Note: The supported range of integers is from min: 0 to max: ${hasher._max}.
 Please make sure your inputs fall within this range.`);
 
 type Args = {

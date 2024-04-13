@@ -51,12 +51,14 @@ export class Hasher {
   _inverse: bigint;
   _xor: bigint;
   _mask: bigint;
+  _max: bigint;
 
   constructor({ bits, prime, inverse, xor }: HasherOptions) {
     this._prime = BigInt(prime);
     this._inverse = BigInt(inverse);
     this._xor = BigInt(xor);
     this._mask = 2n ** BigInt(bits) - 1n;
+    this._max = (1n << BigInt(bits)) - 1n;
   }
 
   encode(n: number): number;
@@ -68,6 +70,9 @@ export class Hasher {
     }
     if (typeof n === "number") {
       return Number(this.encode(BigInt(n)));
+    }
+    if (n > this._max) {
+      console.warn(`input ${n} is greater than max ${this._max}`);
     }
     return n * this._prime & this._mask ^ this._xor;
   }

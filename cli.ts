@@ -4,24 +4,27 @@ import { Hasher } from "./hasher.ts";
 
 const isDeno = typeof (globalThis as any).Deno !== "undefined";
 
-const cmd = isDeno
-  ? "deno run https://deno.land/x/inthash/cli.ts"
-  : "npx inthash";
+const cmd = isDeno ? "deno run jsr:@denostack/inthash/cli" : "npx inthash";
 
-const args = parse(
-  isDeno
-    ? (globalThis as any).Deno.args
-    : (globalThis as any).process.argv.slice(2),
-);
+const rawArgs = isDeno
+  ? (globalThis as any).Deno.args
+  : (globalThis as any).process.argv.slice(2);
+const cmdSuffix = rawArgs.join(" ");
+const args = parse(rawArgs);
 
-const options = Hasher.generate(args.b ?? args.bit ?? args.bits ?? 53);
+const bit = args.b ?? args.bit ?? args.bits ?? 53;
+const options = Hasher.generate(bit);
 
 console.log(JSON.stringify(options, null, "  "));
 console.error(`
+$ ${cmd}${cmdSuffix ? " " + cmdSuffix : ""} | pbcopy
 
-$ ${cmd} | pbcopy
+Now go ahead and paste it into your code! Good luck. :-)
 
-then paste to your code! :-) good luck.`);
+Note: The supported range of integers is from min: 0 to max: ${
+  (1n << BigInt(bit)) - 1n
+}.
+Please make sure your inputs fall within this range.`);
 
 type Args = {
   b?: number;

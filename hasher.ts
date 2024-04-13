@@ -33,7 +33,10 @@ export class Hasher {
   static generate(
     bits?: number,
   ): HasherOptions {
-    bits = bits ?? Number.MAX_SAFE_INTEGER.toString(2).length;
+    bits = bits ?? Number.MAX_SAFE_INTEGER.toString(2).length; // default to Number.MAX_SAFE_INTEGER
+    if (bits < 2) {
+      throw new Error("bits must be greater than 2");
+    }
     const modBase = 2n ** BigInt(bits);
     const prime = randomPrime(bits);
     return {

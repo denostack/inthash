@@ -2,34 +2,32 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        deno-version: [v1.x]
     steps:
       - name: Git Checkout Deno Module
-        uses: actions/checkout@v2
-      - name: Use Deno Version ${{ matrix.deno-version }}
-        uses: denoland/setup-deno@v1
+        uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
         with:
-          deno-version: ${{ matrix.deno-version }}
+          deno-version: vx.x.x
       - name: Format
         run: deno fmt --check
       - name: Lint
         run: deno lint
-      - name: Unit
+      - name: Unit Test
         run: deno test --coverage=coverage
       - name: Create coverage report
-        run:  deno coverage ./coverage --lcov > coverage.lcov
+        run: deno coverage ./coverage --lcov > coverage.lcov
       - name: Collect coverage
-        uses: codecov/codecov-action@v1.0.10
+        uses: codecov/codecov-action@v5
         with:
-          file: ./coverage.lcov
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: denostack/intlit
+          files: ./coverage.lcov
       - name: Build Module
         run: deno task build:npm

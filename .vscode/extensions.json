@@ -1,7 +1,7 @@
 {
   "recommendations": [
-    "github.vscode-github-actions",
     "denoland.vscode-deno",
-    "streetsidesoftware.code-spell-checker"
+    "streetsidesoftware.code-spell-checker",
+    "github.vscode-github-actions"
   ]
 }

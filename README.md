@@ -7,7 +7,6 @@
   <img alt="Language Typescript" src="https://img.shields.io/badge/language-Typescript-007acc.svg?style=flat-square" />
   <br />
   <a href="https://jsr.io/@denostack/inthash"><img alt="JSR version" src="https://jsr.io/badges/@denostack/inthash?style=flat-square" /></a>
-  <a href="https://deno.land/x/inthash"><img alt="Deno version" src="https://deno.land/badge/inthash/version?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/inthash"><img alt="NPM Version" src="https://img.shields.io/npm/v/inthash.svg?style=flat-square&logo=npm" /></a>
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
 </p>
@@ -29,7 +28,7 @@ npm install inthash
 **Deno**
 
 ```ts
-import { Hasher } from "https://deno.land/x/inthash/mod.ts";
+import { Hasher } from "@denostack/inthash";
 ```
 
 ## Usage
@@ -114,7 +113,7 @@ supported:
 npx inthash -b64
 
 # Deno:
-deno run https://deno.land/x/inthash/cli.ts -b64
+deno run jsr:@denostack/inthash/cli -b64
 
 # Output:
 # {

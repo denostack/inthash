@@ -18,11 +18,20 @@ function randomBigInt(range: bigint): bigint {
   if (n === 1) {
     return 0n;
   }
-  if (n < 52) {
-    return BigInt(Math.floor(Math.random() * Number(range)));
-  }
+  const bytes = Math.ceil(n / 8);
+  const mask = (1n << BigInt(n)) - 1n;
+  let result: bigint;
+  do {
+    const buf = new Uint8Array(bytes);
+    crypto.getRandomValues(buf);
+    result = 0n;
+    for (let i = 0; i < bytes; i++) {
+      result = (result << 8n) | BigInt(buf[i]);
+    }
+    result = result & mask;
+  } while (result >= range);
 
-  return BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)); // TODO
+  return result;
 }
 
 // https://github.com/openssl/openssl/blob/4cedf30e995f9789cf6bb103e248d33285a84067/crypto/bn/bn_prime.c#L337
@@ -47,7 +56,7 @@ export function isPrimeMillerRabin(w: bigint, iterations?: number): boolean {
 
   // TODO montgomery
 
-  iterations = iterations ?? w.toString(2).length > 2048 ? 128 : 64;
+  iterations = iterations ?? (w.toString(2).length > 2048 ? 128 : 64);
 
   // (Step 4)
   outer_loop:

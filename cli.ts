@@ -6,9 +6,7 @@ const isDeno = typeof (globalThis as any).Deno !== "undefined";
 
 const cmd = isDeno ? "deno run jsr:@denostack/inthash/cli" : "npx inthash";
 
-const rawArgs = isDeno
-  ? (globalThis as any).Deno.args
-  : (globalThis as any).process.argv.slice(2);
+const rawArgs = isDeno ? (globalThis as any).Deno.args : (globalThis as any).process.argv.slice(2);
 const cmdSuffix = rawArgs.join(" ");
 const args = parse(rawArgs);
 

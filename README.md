@@ -11,11 +11,9 @@
   <a href="https://npmcharts.com/compare/inthash?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/inthash.svg?style=flat-square" /></a>
 </p>
 
-inthash is a versatile library for generating integer hash values in Javascript
-and Typescript using Knuth's multiplicative method. With a user-friendly
-interface, this library allows you to obfuscate predictable numbers, making it
-ideal for scenarios like 'Auto Increment' values in databases. inthash supports
-`number`, `string`, `bigint`.
+inthash is a versatile library for generating integer hash values in Javascript and Typescript using Knuth's
+multiplicative method. With a user-friendly interface, this library allows you to obfuscate predictable numbers, making
+it ideal for scenarios like 'Auto Increment' values in databases. inthash supports `number`, `string`, `bigint`.
 
 ## Installation
 
@@ -103,10 +101,8 @@ const decoded = hasher.decode(encoded); // 100n
 
 ### Handling MySQL `bigint(20)`
 
-To work with `bigint(20)` in MySQL, you need to handle 64-bit values. The old
-version of IntHash supported up to 53-bit values
-(`Number.MAX_SAFE_INTEGER === 2**53 - 1`). From v3 onwards, n-bit values are
-supported:
+To work with `bigint(20)` in MySQL, you need to handle 64-bit values. The old version of IntHash supported up to 53-bit
+values (`Number.MAX_SAFE_INTEGER === 2**53 - 1`). From v3 onwards, n-bit values are supported:
 
 ```bash
 # Node.js:
@@ -126,6 +122,5 @@ deno run jsr:@denostack/inthash/cli -b64
 
 ## See also
 
-- [optimus](https://github.com/jenssegers/optimus) A PHP implementation of
-  Knuth's multiplicative hashing method. inthash is inspired by and ported from
-  this library.
+- [optimus](https://github.com/jenssegers/optimus) A PHP implementation of Knuth's multiplicative hashing method.
+  inthash is inspired by and ported from this library.

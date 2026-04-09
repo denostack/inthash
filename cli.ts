@@ -3,8 +3,9 @@
 import { Hasher } from "./hasher.ts";
 
 const isDeno = typeof (globalThis as any).Deno !== "undefined";
+const isBun = typeof (globalThis as any).Bun !== "undefined";
 
-const cmd = isDeno ? "deno run jsr:@denostack/inthash/cli" : "npx inthash";
+const cmd = isDeno ? "deno run jsr:@denostack/inthash/cli" : isBun ? "bunx inthash" : "npx inthash";
 
 const rawArgs = isDeno ? (globalThis as any).Deno.args : (globalThis as any).process.argv.slice(2);
 const cmdSuffix = rawArgs.join(" ");
@@ -16,12 +17,20 @@ const hasher = new Hasher(options);
 
 console.log(JSON.stringify(options, null, "  "));
 console.error(`
-$ ${cmd}${cmdSuffix ? " " + cmdSuffix : ""} | pbcopy
+Usage:
 
-Now go ahead and paste it into your code! Good luck. :-)
+  $ ${cmd}${cmdSuffix ? " " + cmdSuffix : ""}
 
-Note: The supported range of integers is from min: 0 to max: ${hasher._max}.
-Please make sure your inputs fall within this range.`);
+Example:
+
+  import { Hasher } from "${isDeno ? "jsr:@denostack/inthash" : "inthash"}";
+
+  const hasher = new Hasher(/* paste the JSON above */);
+
+  hasher.encode(1);    // a scrambled integer
+  hasher.decode(...);  // back to 1
+
+Supported range: 0 to ${hasher._max.toLocaleString()} (${bit}-bit).`);
 
 type Args = {
   b?: number;

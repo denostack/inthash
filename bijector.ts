@@ -78,8 +78,10 @@ export class Bijector {
       }
       return Number(this.encode(BigInt(n)));
     }
-    if (n > this._max) {
-      console.warn(`input ${n} is greater than max ${this._max}`);
+    if (n < 0n || n > this._max) {
+      throw new RangeError(
+        `input ${n} is out of range [0, ${this._max}] for bits=${this._bits}`,
+      );
     }
     return n * this._prime & this._mask ^ this._xor;
   }
@@ -98,6 +100,11 @@ export class Bijector {
         );
       }
       return Number(this.decode(BigInt(n)));
+    }
+    if (n < 0n || n > this._max) {
+      throw new RangeError(
+        `input ${n} is out of range [0, ${this._max}] for bits=${this._bits}`,
+      );
     }
     return (n ^ this._xor) * this._inverse & this._mask;
   }

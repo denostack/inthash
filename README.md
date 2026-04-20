@@ -142,6 +142,9 @@ npx bijector -b128  # 128-bit range (bigint / string only)
 get rounded to the nearest float). To prevent data loss, `encode` / `decode` throw a `TypeError` in that case — use
 `bigint` or `string` instead. See the [MySQL `bigint(20)` example](#obfuscate-auto-increment-ids) for a 64-bit setup.
 
+**Range:** all inputs must be in `[0, 2^bits - 1]` (both ends inclusive). Negative or out-of-range inputs throw
+`RangeError` — the bijection is defined only on that interval.
+
 ## Use cases
 
 ### Obfuscate auto-increment IDs

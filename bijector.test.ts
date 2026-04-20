@@ -1,5 +1,4 @@
 import { assertEquals, assertNotEquals, assertThrows } from "@std/assert";
-import { assertSpyCall, assertSpyCalls, spy } from "@std/testing/mock";
 import { Bijector } from "./bijector.ts";
 
 Deno.test("bijector, encode and decode", () => {
@@ -133,15 +132,34 @@ Deno.test("number input throws for bits > 53", () => {
   }
 });
 
-Deno.test("overflow", () => {
-  const bijector = new Bijector(Bijector.generate(8));
+Deno.test("out-of-range input throws RangeError", () => {
+  const bijector = new Bijector(Bijector.generate(8)); // max = 255
 
-  const logSpy = spy(console, "warn");
+  // overflow (number)
+  assertThrows(() => bijector.encode(256), RangeError, "out of range");
+  assertThrows(() => bijector.decode(256), RangeError, "out of range");
 
-  bijector.encode(256);
+  // overflow (bigint)
+  assertThrows(() => bijector.encode(256n), RangeError, "out of range");
+  assertThrows(() => bijector.decode(256n), RangeError, "out of range");
 
-  assertSpyCall(logSpy, 0, {
-    args: ["input 256 is greater than max 255"],
-  });
-  assertSpyCalls(logSpy, 1);
+  // overflow (string)
+  assertThrows(() => bijector.encode("256"), RangeError, "out of range");
+  assertThrows(() => bijector.decode("256"), RangeError, "out of range");
+
+  // negative (number)
+  assertThrows(() => bijector.encode(-1), RangeError, "out of range");
+  assertThrows(() => bijector.decode(-1), RangeError, "out of range");
+
+  // negative (bigint)
+  assertThrows(() => bijector.encode(-1n), RangeError, "out of range");
+  assertThrows(() => bijector.decode(-1n), RangeError, "out of range");
+
+  // negative (string)
+  assertThrows(() => bijector.encode("-1"), RangeError, "out of range");
+  assertThrows(() => bijector.decode("-1"), RangeError, "out of range");
+
+  // boundary values accepted
+  assertEquals(bijector.decode(bijector.encode(0)), 0);
+  assertEquals(bijector.decode(bijector.encode(255)), 255);
 });

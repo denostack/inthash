@@ -22,17 +22,17 @@ function generateXor(bits: number): bigint {
   return result;
 }
 
-export interface HasherOptions {
+export interface BijectorOptions {
   bits: number;
   prime: string;
   inverse: string;
   xor: string;
 }
 
-export class Hasher {
+export class Bijector {
   static generate(
     bits?: number,
-  ): HasherOptions {
+  ): BijectorOptions {
     bits = bits ?? Number.MAX_SAFE_INTEGER.toString(2).length; // default to Number.MAX_SAFE_INTEGER
     if (bits < 2) {
       throw new Error("bits must be greater than 2");
@@ -53,7 +53,7 @@ export class Hasher {
   _mask: bigint;
   _max: bigint;
 
-  constructor({ bits, prime, inverse, xor }: HasherOptions) {
+  constructor({ bits, prime, inverse, xor }: BijectorOptions) {
     this._prime = BigInt(prime);
     this._inverse = BigInt(inverse);
     this._xor = BigInt(xor);
@@ -89,4 +89,7 @@ export class Hasher {
     }
     return (n ^ this._xor) * this._inverse & this._mask;
   }
+
+  forward: Bijector["encode"] = this.encode;
+  inverse: Bijector["decode"] = this.decode;
 }

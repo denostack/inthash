@@ -1,19 +1,19 @@
 // deno-lint-ignore-file no-explicit-any
 
-import { Hasher } from "./hasher.ts";
+import { Bijector } from "./bijector.ts";
 
 const isDeno = typeof (globalThis as any).Deno !== "undefined";
 const isBun = typeof (globalThis as any).Bun !== "undefined";
 
-const cmd = isDeno ? "deno run jsr:@denostack/inthash/cli" : isBun ? "bunx inthash" : "npx inthash";
+const cmd = isDeno ? "deno run jsr:@denostack/bijector/cli" : isBun ? "bunx bijector" : "npx bijector";
 
 const rawArgs = isDeno ? (globalThis as any).Deno.args : (globalThis as any).process.argv.slice(2);
 const cmdSuffix = rawArgs.join(" ");
 const args = parse(rawArgs);
 
 const bit = args.b ?? args.bit ?? args.bits ?? 53;
-const options = Hasher.generate(bit);
-const hasher = new Hasher(options);
+const options = Bijector.generate(bit);
+const bijector = new Bijector(options);
 
 console.log(JSON.stringify(options, null, "  "));
 console.error(`
@@ -23,14 +23,14 @@ Usage:
 
 Example:
 
-  import { Hasher } from "${isDeno ? "jsr:@denostack/inthash" : "inthash"}";
+  import { Bijector } from "${isDeno ? "jsr:@denostack/bijector" : "bijector"}";
 
-  const hasher = new Hasher(/* paste the JSON above */);
+  const bijector = new Bijector(/* paste the JSON above */);
 
-  hasher.encode(1);    // a scrambled integer
-  hasher.decode(...);  // back to 1
+  bijector.encode(1);    // a scrambled integer
+  bijector.decode(...);  // back to 1
 
-Supported range: 0 to ${hasher._max.toLocaleString()} (${bit}-bit).`);
+Supported range: 0 to ${bijector._max.toLocaleString()} (${bit}-bit).`);
 
 type Args = {
   b?: number;

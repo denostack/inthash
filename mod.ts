@@ -1,2 +1,2 @@
-export type { HasherOptions } from "./hasher.ts";
-export { Hasher } from "./hasher.ts";
+export type { BijectorOptions } from "./bijector.ts";
+export { Bijector } from "./bijector.ts";

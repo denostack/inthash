@@ -22,17 +22,8 @@ deterministic `encode` / `decode` pair.
 Unlike a regular hash (one-way) or a random generator, `bijector` is **mathematically invertible** — the inverse is
 guaranteed to exist because the transformation is a bijection on `[0, 2^bits)`.
 
-## Use cases
-
-- **Obfuscate auto-increment IDs** — expose `/users/6432533451586367` instead of `/users/100`
-- **License / serial key generation** — turn a sequence counter into a random-looking key
-- **URL shorteners** — deterministic public codes from internal row IDs
-- **Coupon / voucher codes** — non-guessable but reversible back to the issuing record
-- **A/B bucketing & deterministic shuffles** — stable, reversible permutation over an integer space
-- **Lightweight format-preserving transformation** — when you need reversibility but not cryptographic security
-
-> ⚠️ `bijector` is **obfuscation, not encryption**. Given enough (input, output) pairs an attacker can recover the
-> parameters. Do not use it as a security primitive.
+Common applications: auto-increment ID obfuscation, URL shorteners, license keys, coupon codes, A/B bucketing. See
+[Use cases](#use-cases) for concrete examples.
 
 ## Installation
 
@@ -129,26 +120,117 @@ bijector.inverse(bijector.forward(100)); // 100
 - Use `encode` / `decode` for codec-style flows (ID ↔ public code).
 - Use `forward` / `inverse` when you are thinking about the underlying bijection as a math operation.
 
-### Handling MySQL `bigint(20)`
+### Bit width
 
-To work with `bigint(20)` in MySQL, you need 64-bit values. The old IntHash releases supported up to 53-bit values
-(`Number.MAX_SAFE_INTEGER === 2**53 - 1`). Since v3, arbitrary n-bit values are supported:
+The default `bits: 53` covers JavaScript's safe integer range (`Number.MAX_SAFE_INTEGER === 2**53 - 1`). Arbitrary bit
+widths are supported — pass `-b<n>` to the CLI and use `bigint` inputs when the range exceeds 53 bits. See the
+[MySQL `bigint(20)` example](#obfuscate-auto-increment-ids) for a 64-bit setup.
 
 ```bash
-# Node.js:
-npx bijector -b64
-
-# Deno:
-deno run jsr:@denostack/bijector/cli -b64
-
-# Output:
-# {
-#   "bits": 64,
-#   "prime": "16131139598801670337",
-#   "inverse": "14287487925114175297",
-#   "xor": "8502035541264656686"
-# }
+npx bijector -b32   # 32-bit range
+npx bijector -b64   # 64-bit range (bigint required)
+npx bijector -b128  # 128-bit range (bigint required)
 ```
+
+## Use cases
+
+### Obfuscate auto-increment IDs
+
+Expose `/users/6432533451586367` instead of `/users/100`. Hides your user base size, prevents ID enumeration, and keeps
+the column numeric — no string codes in your database.
+
+```ts
+// Serializing: internal id → public id
+response.publicId = bijector.encode(user.id); // 6432533451586367
+
+// Routing: public id → internal id
+app.get("/users/:id", (req, res) => {
+  const userId = bijector.decode(Number(req.params.id));
+  return db.users.findById(userId);
+});
+```
+
+**For MySQL `bigint(20)` (64-bit) columns**, generate 64-bit parameters with `-b64` and use `bigint` inputs to cover the
+full range:
+
+```bash
+npx bijector -b64
+```
+
+```ts
+const bijector = new Bijector({
+  bits: 64,
+  prime: "16131139598801670337",
+  inverse: "14287487925114175297",
+  xor: "8502035541264656686",
+});
+
+bijector.encode(12345n); // bigint in, bigint out — safe beyond Number.MAX_SAFE_INTEGER
+```
+
+### License / serial key generation
+
+Turn a sequential license counter into a random-looking key. Customers cannot guess adjacent keys, but your server can
+always decode back to the issued sequence number for lookup.
+
+```ts
+const encoded = bijector.encode(nextLicenseNumber);
+const key = encoded.toString(36).toUpperCase(); // "1KVXZ9ZPQ8M"
+
+// Verify on redemption
+const seq = bijector.decode(parseInt(key, 36));
+await db.licenses.findBy({ sequence: seq });
+```
+
+### URL shorteners
+
+Generate deterministic public short codes from internal row IDs. Because the mapping is a bijection, there are **no
+collisions** and you don't need a separate lookup table for reverse mapping.
+
+```ts
+// Create: row id → short code
+const shortCode = bijector.encode(urlRow.id).toString(36); // "1kvxz9"
+
+// Resolve: short code → row id
+const rowId = bijector.decode(parseInt(shortCode, 36));
+```
+
+### Coupon / voucher codes
+
+Issue non-guessable codes that decode back to the issuing record. You never need to store the code itself — the issued
+sequence number is recoverable from the code, so validation is a single primary-key lookup.
+
+```ts
+// Issue (encode campaign + serial into one integer)
+const payload = campaignId * 1_000_000 + serial;
+const code = bijector.encode(payload).toString(36).toUpperCase();
+
+// Redeem
+const decoded = bijector.decode(parseInt(userInput, 36));
+const campaign = Math.floor(decoded / 1_000_000);
+const issuedSerial = decoded % 1_000_000;
+```
+
+### A/B bucketing & deterministic shuffles
+
+A bijection over an integer range is exactly a permutation of that range. That makes `bijector` useful for stable,
+reversible assignment — A/B experiment buckets, load-balancing hash rings, or deterministic shuffles without storing a
+mapping table.
+
+```ts
+// Stable bucket assignment. Same user always lands in the same bucket,
+// distribution looks uniform, and you can recover the user from the bucket key.
+const bucket = Number(bijector.encode(BigInt(userId)) % 100n);
+```
+
+### Lightweight format-preserving transformation
+
+When you need a reversible integer-in, integer-out transformation but **not** cryptographic security — for example,
+anonymizing order numbers in logs or exports while keeping the column type intact. For real security (regulated data,
+adversarial threat model), use AES-GCM or format-preserving encryption (FF1/FF3) instead.
+
+> ⚠️ `bijector` is **obfuscation, not encryption**. Given enough (input, output) pairs an attacker can recover the
+> parameters. Do not use it as a security primitive.
 
 ## FAQ
 

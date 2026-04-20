@@ -1,4 +1,4 @@
-import { assertEquals, assertNotEquals } from "@std/assert";
+import { assertEquals, assertNotEquals, assertThrows } from "@std/assert";
 import { assertSpyCall, assertSpyCalls, spy } from "@std/testing/mock";
 import { Bijector } from "./bijector.ts";
 
@@ -97,6 +97,39 @@ Deno.test("full coverage of 8bit", () => {
     for (let i = 0; i < 256; i++) {
       assertEquals(bijector.decode(bijector.encode(i)), i);
     }
+  }
+});
+
+Deno.test("number input is allowed for bits <= 53", () => {
+  for (const bits of [8, 16, 32, 52, 53]) {
+    const bijector = new Bijector(Bijector.generate(bits));
+    const encoded = bijector.encode(100);
+    assertEquals(typeof encoded, "number");
+    assertEquals(bijector.decode(encoded), 100);
+  }
+});
+
+Deno.test("number input throws for bits > 53", () => {
+  for (const bits of [54, 60, 64, 128]) {
+    const bijector = new Bijector(Bijector.generate(bits));
+
+    assertThrows(
+      () => bijector.encode(100),
+      TypeError,
+      `bits=${bits}`,
+    );
+    assertThrows(
+      () => bijector.decode(100),
+      TypeError,
+      `bits=${bits}`,
+    );
+
+    // bigint and string inputs still work
+    const encodedBig = bijector.encode(100n);
+    assertEquals(bijector.decode(encodedBig), 100n);
+
+    const encodedStr = bijector.encode("100");
+    assertEquals(bijector.decode(encodedStr), "100");
   }
 });
 

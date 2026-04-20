@@ -120,17 +120,27 @@ bijector.inverse(bijector.forward(100)); // 100
 - Use `encode` / `decode` for codec-style flows (ID ↔ public code).
 - Use `forward` / `inverse` when you are thinking about the underlying bijection as a math operation.
 
-### Bit width
+### Bit width and the `number` safety boundary
 
-The default `bits: 53` covers JavaScript's safe integer range (`Number.MAX_SAFE_INTEGER === 2**53 - 1`). Arbitrary bit
-widths are supported — pass `-b<n>` to the CLI and use `bigint` inputs when the range exceeds 53 bits. See the
-[MySQL `bigint(20)` example](#obfuscate-auto-increment-ids) for a 64-bit setup.
+The default `bits: 53` covers JavaScript's safe integer range (`Number.MAX_SAFE_INTEGER === 2^53 - 1`). Arbitrary bit
+widths are supported — pass `-b<n>` to the CLI to generate wider parameters:
 
 ```bash
 npx bijector -b32   # 32-bit range
-npx bijector -b64   # 64-bit range (bigint required)
-npx bijector -b128  # 128-bit range (bigint required)
+npx bijector -b64   # 64-bit range (bigint / string only)
+npx bijector -b128  # 128-bit range (bigint / string only)
 ```
+
+**Input type rules:**
+
+| `bits` range | `number` input | `bigint` input | `string` input |
+| ------------ | -------------- | -------------- | -------------- |
+| `bits <= 53` | ✅ safe        | ✅             | ✅             |
+| `bits > 53`  | ❌ **throws**  | ✅             | ✅             |
+
+`bits > 53` with a `number` input would silently corrupt values (the encoded output can exceed `MAX_SAFE_INTEGER` and
+get rounded to the nearest float). To prevent data loss, `encode` / `decode` throw a `TypeError` in that case — use
+`bigint` or `string` instead. See the [MySQL `bigint(20)` example](#obfuscate-auto-increment-ids) for a 64-bit setup.
 
 ## Use cases
 

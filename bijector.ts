@@ -47,6 +47,7 @@ export class Bijector {
     };
   }
 
+  _bits: number;
   _prime: bigint;
   _inverse: bigint;
   _xor: bigint;
@@ -54,6 +55,7 @@ export class Bijector {
   _max: bigint;
 
   constructor({ bits, prime, inverse, xor }: BijectorOptions) {
+    this._bits = bits;
     this._prime = BigInt(prime);
     this._inverse = BigInt(inverse);
     this._xor = BigInt(xor);
@@ -69,6 +71,11 @@ export class Bijector {
       return this.encode(BigInt(n)).toString();
     }
     if (typeof n === "number") {
+      if (this._bits > 53) {
+        throw new TypeError(
+          `Bijector with bits=${this._bits} does not support number inputs (only bits <= 53 is safe for JavaScript Number). Use bigint or string instead.`,
+        );
+      }
       return Number(this.encode(BigInt(n)));
     }
     if (n > this._max) {
@@ -85,6 +92,11 @@ export class Bijector {
       return this.decode(BigInt(n)).toString();
     }
     if (typeof n === "number") {
+      if (this._bits > 53) {
+        throw new TypeError(
+          `Bijector with bits=${this._bits} does not support number inputs (only bits <= 53 is safe for JavaScript Number). Use bigint or string instead.`,
+        );
+      }
       return Number(this.decode(BigInt(n)));
     }
     return (n ^ this._xor) * this._inverse & this._mask;

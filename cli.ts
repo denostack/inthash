@@ -3,7 +3,9 @@
 import { Bijector } from "./bijector.ts";
 
 const isDeno = typeof (globalThis as any).Deno !== "undefined";
-const isBun = typeof (globalThis as any).Bun !== "undefined";
+const isBun = typeof (globalThis as any).Bun !== "undefined" ||
+  (typeof (globalThis as any).process !== "undefined" &&
+    typeof (globalThis as any).process.versions?.bun === "string");
 
 const cmd = isDeno ? "deno run jsr:@denostack/bijector/cli" : isBun ? "bunx bijector" : "npx bijector";
 
